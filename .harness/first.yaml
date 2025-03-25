@@ -1,0 +1,37 @@
+pipeline:
+  name: sample
+  identifier: sample
+  projectIdentifier: default_project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: githuball
+        repoName: express-hello-world
+        build: <+input>
+  stages:
+    - stage:
+        name: samplebuild
+        identifier: samplebuild
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: npm install
+        delegateSelectors:
+          - docker-delegate
